@@ -18,9 +18,23 @@ namespace TestFall1
         }
 
         [Test]
-        public void Test1()
+        public void GoToAmazonTest()
         {
             driver.Navigate().GoToUrl(@amazonUrl);
+
+            // Assert
+
+            //IsSearchBoxTest
+            IWebElement searchBox = driver.FindElement(By.Id("twotabsearchtextbox"));
+
+            // Assert
+
+            //IsSearchBoxTextEqual
+            searchBox.SendKeys("adidas schuhe");
+
+            searchBox.SendKeys(Keys.Enter);
+
+            // assert
         }
     }
 }
