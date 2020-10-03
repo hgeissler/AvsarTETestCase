@@ -2,8 +2,11 @@ using NUnit.Framework;
 
 namespace TestFall1
 {
-    public class Tests
+    [TestFixture]
+    public class AmazonProductSearchTest
     {
+
+
         [SetUp]
         public void Setup()
         {
