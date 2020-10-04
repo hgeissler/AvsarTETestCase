@@ -1,14 +1,14 @@
-using NUnit.Framework;
+ï»¿using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using System;
-using TestFall1.Pages;
+using AmazonShopTest.Pages;
 
-namespace TestFall1
+namespace AmazonShopTest
 {
     [TestFixture]
-    public class TestFall1
+    public class TestFall2
     {
         IWebDriver driver;
 
@@ -37,7 +37,7 @@ namespace TestFall1
             var searchResultsPage = new SearchResultsPage(driver);
 
             // Assert
-            Assert.IsTrue(searchResultsPage.HasFifthResult, "No search item found at 5th position");
+            Assert.IsTrue(searchResultsPage.HasResults(5), "No search item found at 5th position");
 
             // Click on first article
             searchResultsPage.ClickFirstArticle();
@@ -49,7 +49,7 @@ namespace TestFall1
             Assert.IsTrue(articlePage.ArticleTitle.Contains(searchResultsPage.ArticleTitle), "The correct article page has not loaded. Article text from search does not match with title from article page");
 
             // Select article size
-            articlePage.SelectSize();
+            //articlePage.SelectSize();
 
             // Add article to shopping cart
             articlePage.ClickAddToCart();
@@ -59,7 +59,7 @@ namespace TestFall1
 
             // Assert
             Assert.IsTrue(driver.Title.Equals("Amazon.de Einkaufswagen"), "The title for shopping cart page does not show");
-            Assert.AreEqual("Zum Einkaufswagen hinzugefügt", shoppingCartPage.AddedToCartText, "The message \"Zum Einkaufswagen hizugefügt\" does not show");
+            Assert.AreEqual("Zum Einkaufswagen hinzugefÃ¼gt", shoppingCartPage.AddedToCartText, "The message \"Zum Einkaufswagen hizugefÃ¼gt\" does not show");
         }
 
         [TearDown]

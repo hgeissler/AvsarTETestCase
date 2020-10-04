@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace TestFall1.Pages
+namespace AmazonShopTest.Pages
 {
     class SearchResultsPage
     {
@@ -13,22 +13,6 @@ namespace TestFall1.Pages
 
         public string ArticleTitle { get; }
         public IWebDriver Driver { get; }
-        public bool HasFifthResult
-        {
-            get
-            {
-                try
-                {
-                    // search_result_6 is the 5th Shoe found
-                    return Driver.FindElement(By.CssSelector("[data-component-type='s-search-result'][data-cel-widget='search_result_6']")).Size.Height > 0;
-                }
-                catch (NoSuchElementException)
-                {
-
-                    return false;
-                }
-            }
-        }
 
         public SearchResultsPage(IWebDriver driver)
         {
@@ -40,6 +24,22 @@ namespace TestFall1.Pages
 
             _firstArticleLinkText = _firstArticle.FindElement(By.CssSelector("h2 a"));
             ArticleTitle = _firstArticleLinkText.Text;
+        }
+
+        public bool HasResults(int count)
+        {
+            // count+1, because eg. 5th item has index 6 at amazon search-results
+            string selector = "[data - component - type = 's-search-result'][data - cel - widget = 'search_result_" + (count+1) + "']";
+            try
+            {
+                // search_result_6 is the 5th Shoe found
+                return Driver.FindElement(By.CssSelector(selector)).Size.Height > 0;
+            }
+            catch (NoSuchElementException)
+            {
+
+                return false;
+            }
         }
 
         public void ClickFirstArticle()
