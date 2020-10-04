@@ -27,9 +27,8 @@ namespace TestFall1
             // Assert
 
             // Close Cooky Window
-            //var waitForCookieWindow = new WebDriverWait(driver, TimeSpan.FromSeconds(5)).Until(.ElementToBeClickable(By.XPath("//a/h3")));
-            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 5));
-            var cookyWindowOkButton = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.Id("sp-cc-accept")));
+            var waitForCookyWindow = new WebDriverWait(driver, new TimeSpan(0, 0, 5));
+            var cookyWindowOkButton = waitForCookyWindow.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.Id("sp-cc-accept")));
             cookyWindowOkButton.Click();
 
             //IsSearchBoxTest
@@ -45,15 +44,22 @@ namespace TestFall1
             // Assert
 
             // FindFirstArticleTest
-            //IWebElement searchResults = driver.FindElement(By.CssSelector("[data-component-type='s-search-results']"));
-            //IWebElement firstArticle = driver.FindElement(By.CssSelector("[data-cel-widget='search_result_2']"));
-            IWebElement firstArticle = driver.FindElement(By.CssSelector("[data-index='2']"));
+            var waitForSearchResults = new WebDriverWait(driver, new TimeSpan(0, 0, 5));
+            IWebElement firstArticle = waitForSearchResults.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.CssSelector("[data-cel-widget='search_result_2']")));
+
             IWebElement firstArticleLinkText = firstArticle.FindElement(By.CssSelector("h2 a"));
             firstArticleLinkText.Click();
 
             // SelectSize
-            SelectElement dropdownMenuSelectSize = new SelectElement(driver.FindElement(By.Id("native_dropdown_selected_size_name")));
-            dropdownMenuSelectSize.SelectByIndex(1);
+            var waitForArticlePage = new WebDriverWait(driver, new TimeSpan(0, 0, 5));
+            IWebElement dropdownMenuSelectSize = waitForArticlePage.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.Id("native_dropdown_selected_size_name")));
+
+            SelectElement selectSize = new SelectElement(dropdownMenuSelectSize);
+            selectSize.SelectByIndex(1);
+
+            // AddToCart
+            IWebElement addToCartButton = driver.FindElement(By.Id("add-to-cart-button"));
+            addToCartButton.Click();
         }
     }
 }
