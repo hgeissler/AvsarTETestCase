@@ -18,7 +18,7 @@ namespace AmazonShopTest.Pages
         {
             Driver = driver;
             // wait for pageready
-            var waitForSearchResults = new WebDriverWait(Driver, new TimeSpan(0, 0, 5));
+            var waitForSearchResults = new WebDriverWait(Driver, new TimeSpan(0, 0, 10));
             // first article after advertising has index 2
             _firstArticle = waitForSearchResults.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.CssSelector("[data-cel-widget='search_result_2']")));
 

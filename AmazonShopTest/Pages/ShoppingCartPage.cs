@@ -20,7 +20,5 @@ namespace AmazonShopTest.Pages
 
             AddedToCartText = addedToCart.Text;
         }
-
-        
     }
 }
