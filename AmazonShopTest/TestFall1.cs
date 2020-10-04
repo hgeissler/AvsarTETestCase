@@ -49,7 +49,7 @@ namespace AmazonShopTest
             Assert.IsTrue(articlePage.ArticleTitle.Contains(searchResultsPage.ArticleTitle), "The correct article page has not loaded. Article text from search does not match with title from article page");
 
             // Select article size
-            //articlePage.SelectSize();
+            articlePage.SelectSize();
 
             // Add article to shopping cart
             articlePage.ClickAddToCart();

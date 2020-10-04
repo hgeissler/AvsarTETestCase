@@ -29,7 +29,7 @@ namespace AmazonShopTest.Pages
         public bool HasResults(int count)
         {
             // count+1, because eg. 5th item has index 6 at amazon search-results
-            string selector = "[data - component - type = 's-search-result'][data - cel - widget = 'search_result_" + (count+1) + "']";
+            string selector = "[data-component-type='s-search-result'][data-cel-widget='search_result_" + (count+1) + "']";
             try
             {
                 // search_result_6 is the 5th Shoe found

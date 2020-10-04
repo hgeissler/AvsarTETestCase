@@ -2,6 +2,7 @@
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace AmazonShopTest.Pages
@@ -27,8 +28,18 @@ namespace AmazonShopTest.Pages
             {
                 IWebElement selectSizeElement = Driver.FindElement(By.Id("native_dropdown_selected_size_name"));
                 SelectElement selectSize = new SelectElement(selectSizeElement);
-                selectSize.SelectByIndex(1);
+                var selectOptions = selectSize.Options;
+
+                foreach (var option in selectOptions)
+                {
+                    if (option.GetAttribute("class") == "dropdownAvailable")
+                    {
+                        selectSize.SelectByValue(option.GetAttribute("value"));
+                        break;
+                    }
+                }
             }
+
             catch (NoSuchElementException)
             {
 
