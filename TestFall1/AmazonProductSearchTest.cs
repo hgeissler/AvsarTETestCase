@@ -20,11 +20,17 @@ namespace TestFall1
         }
 
         [Test]
-        public void GoToAmazonTest()
+        public void ShopAdidasShoeTest()
         {
             driver.Navigate().GoToUrl(@amazonUrl);
 
+            // IsCorrectPageLoadedTest
+            bool hasDesktopBanner = driver.FindElement(By.Id("desktop-banner")).Size.Height > 0;
+            bool amazonPageIsLoaded = driver.Title.StartsWith("Amazon.de:");
+
             // Assert
+            Assert.IsTrue(hasDesktopBanner, "The Hero Banner from Amazon landing page has not been loaded");
+            Assert.IsTrue(amazonPageIsLoaded, "The Title of this webpage does not start with \"Amazon.de:\"");
 
             // Close Cooky Window
             var waitForCookyWindow = new WebDriverWait(driver, new TimeSpan(0, 0, 5));
