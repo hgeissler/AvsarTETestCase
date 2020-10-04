@@ -98,7 +98,7 @@ namespace TestFall1
             try
             {
                 IWebElement selectSizeElement = driver.FindElement(By.Id("native_dropdown_selected_size_name"));
-                SelectElement selectSize = new SelectElement(dropdownMenuSelectSize);
+                SelectElement selectSize = new SelectElement(selectSizeElement);
                 selectSize.SelectByIndex(1);
             }
             catch (NoSuchElementException)
@@ -111,6 +111,19 @@ namespace TestFall1
             // AddToCart
             IWebElement addToCartButton = driver.FindElement(By.Id("add-to-cart-button"));
             addToCartButton.Click();
+
+            // Wait for shopping cart page to load
+
+            var waitForShoppingCart = new WebDriverWait(driver, new TimeSpan(0, 0, 5));
+            IWebElement addedToCart = waitForShoppingCart.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.CssSelector("[id='huc-v2-order-row-messages']")));
+
+            string addedToCartMessage = addedToCart.Text;
+
+            string expectedAddToCartMessage = "Zum Einkaufswagen hinzugefügt";
+
+            // Assert
+            Assert.IsTrue(driver.Title.Equals("Amazon.de Einkaufswagen"), "The title for shopping cart page does not show");
+            Assert.AreEqual(expectedAddToCartMessage, addedToCartMessage, "The message \"Zum Einkaufswagen hizugefügt\" does not show");
         }
     }
 }
